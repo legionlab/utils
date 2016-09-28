@@ -1,6 +1,6 @@
 <?php
 
-namespace Llab\Utils;
+namespace LegionLab\Utils;
 
 /**
  * Created by PhpStorm.
@@ -48,7 +48,7 @@ class ValidatePost
     {
         if($sanitize)
             $_POST[$name] = filter_input(INPUT_POST, $name, FILTER_SANITIZE_NUMBER_FLOAT);
-        
+
         if(filter_var($_POST[$name], FILTER_VALIDATE_FLOAT))
             return self::interval($max, $min, $name);
         else {

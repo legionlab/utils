@@ -1,6 +1,6 @@
 <?php
 
-namespace Llab\Utils;
+namespace LegionLab\Utils;
 
 /**
  * Controller Session
@@ -45,7 +45,7 @@ class Cookies
 
     /**
      * Cria uma variavel de cookie com o tempo definido da classe
-     * 
+     *
      * @param $key - nome do cookie
      * @param $value - valor do cookie
      */

@@ -1,9 +1,9 @@
 <?php
 
-namespace Llab\Utils;
+namespace LegionLab\Utils;
 
-use Llab\Troubadour\Settings;
-use Llab\Troubadour\Development\Log;
+use LegionLab\Troubadour\Settings;
+use LegionLab\Troubadour\Development\Log;
 
 class PayPalAPI
 {

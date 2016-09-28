@@ -1,6 +1,6 @@
 <?php
 
-namespace Llab\Utils;
+namespace LegionLab\Utils;
 
 /**
  * Created by PhpStorm.
@@ -193,7 +193,7 @@ class Criteria
 
     /**
      * Retorna array de valores retirando o . em chaves que tem tabela.coluna
-     * 
+     *
      * @return array
      */
     public function getValues()
@@ -208,8 +208,8 @@ class Criteria
     public function clear()
     {
 
-        $this->values  = array(); 
-        $this->where = $this->order = $this->limit = $this->tables = ""; 
+        $this->values  = array();
+        $this->where = $this->order = $this->limit = $this->tables = "";
         $this->select = "*";
 
         return $this;

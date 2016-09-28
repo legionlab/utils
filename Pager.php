@@ -1,6 +1,6 @@
 <?php
 
-namespace Llab\Utils;
+namespace LegionLab\Utils;
 
 /**
  * Control Pager

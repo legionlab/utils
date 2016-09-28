@@ -1,6 +1,6 @@
 <?php
 
-namespace Llab\Utils;
+namespace LegionLab\Utils;
 
 /**
  * Controller Session
@@ -33,7 +33,7 @@ class Post
 
     /**
      * Cria uma variavel de post com o tempo definido da classe
-     * 
+     *
      * @param $key - nome do post
      * @param $value - valor do post
      */

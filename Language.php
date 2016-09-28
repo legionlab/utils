@@ -1,9 +1,9 @@
 <?php
 
-namespace Llab\Utils;
+namespace LegionLab\Utils;
 
-use Llab\Troubadour\Collections\Session;
-use Llab\Troubadour\Collections\Settings;
+use LegionLab\Troubadour\Collections\Session;
+use LegionLab\Troubadour\Collections\Settings;
 
 /**
  * Controller Language

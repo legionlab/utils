@@ -1,8 +1,8 @@
 <?php
 
-namespace Llab\Utils;
+namespace LegionLab\Utils;
 
-class CriteriaBuilder 
+class CriteriaBuilder
 {
     public static function create()
     {
