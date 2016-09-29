@@ -8,10 +8,5 @@
           "name" : "Leonardo Vilarinho",
           "email" : "leonardo-i@outlook.com"
         }
-    ],
-    "autoload": {
-        "psr-0": {
-            "LegionLab\\Utils\\": ""
-        }
-    }
+    ]
 }
