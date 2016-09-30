@@ -1,12 +1,17 @@
 {
-    "name" : "legionlab/utils",
-    "description": "Utils",
-    "type": "beta",
+    "name": "legionlab/utils",
+    "description": "Utils from Troubadour Framework",
+    "type": "library",
     "license": "MITS",
-    "authors" : [
+    "authors": [
         {
-          "name" : "Leonardo Vilarinho",
-          "email" : "leonardo-i@outlook.com"
+            "name": "LegionLab",
+            "email": "leonardo-i@outlook.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "LegionLab\\Utils\\": "src/"
+        }
+    }
 }
