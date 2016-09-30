@@ -18,7 +18,7 @@ class Language
     /**
      * @var string - diretório definido para ter arquivos de idiomas
      */
-    private static $dir = 'languages/';
+    private static $dir = ROOT.'settings/languages/';
 
     /**
      * Resgata o idioma atual sendo utilizado.
@@ -38,7 +38,7 @@ class Language
     {
        if(Session::get('current_lang') === false) {
            $lang = mb_strtolower(explode(",", $_SERVER["HTTP_ACCEPT_LANGUAGE"])[0]);
-           if(file_exists(__DIR__.'/../../../settings/'.self::$dir .  $lang. Settings::get('langExtension')))
+           if(file_exists(self::$dir . $lang. Settings::get('langExtension')))
                Session::set('current_lang', $lang);
            else
                Session::set('current_lang', self::all()[0]);
@@ -63,7 +63,8 @@ class Language
      */
     public static function get($index, $var, $section = true)
     {
-        $file = __DIR__.'/../../../settings/'.self::$dir .  Session::get('current_lang'). Settings::get('langExtension');
+        $file = self::$dir .  Session::get('current_lang'). Settings::get('langExtension');
+
         if(file_exists($file)) {
             $archive = parse_ini_file($file, $section);
             if(key_exists($index, $archive))
@@ -94,9 +95,12 @@ class Language
         {
             $directory = dir(self::$dir);
             $archives = array();
-            while(($archive = $directory->read()) !== false)
-                if(file_exists(self::$dir . $archive) and !is_dir(self::$dir . $archive))
+            while(($archive = $directory->read()) !== false ) {
+                $file = self::$dir . $archive;
+                if(file_exists($file) and !is_dir($file))
                     array_push($archives, str_replace(Settings::get('langExtension'), "", $archive));
+            }
+
 
             $directory->close();
             return $archives;
