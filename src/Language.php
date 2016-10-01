@@ -37,7 +37,7 @@ class Language
     public static function init()
     {
        if(Session::get('current_lang') === false) {
-           $lang = mb_strtolower(explode(",", $_SERVER["HTTP_ACCEPT_LANGUAGE"])[0]);
+           $lang = mb_strtolower(substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 2)[0]);
            if(file_exists(self::$dir . $lang. Settings::get('langExtension')))
                Session::set('current_lang', $lang);
            else
