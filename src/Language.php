@@ -18,7 +18,7 @@ class Language
     /**
      * @var string - diretório definido para ter arquivos de idiomas
      */
-    private static $dir = ROOT.'settings/languages/';
+    private static $dir = 'languages/';
 
     /**
      * Resgata o idioma atual sendo utilizado.
@@ -34,16 +34,16 @@ class Language
      * Define uma linguagem padrão para o site dependendo do idioma do navegador do usuário, caso não encontre
      * arquivo de linguagem para o idioma nativo, pega o primeiro idioma que encontrar.
      */
-    public static function init()
+    public static function init($home)
     {
-       if(Session::get('current_lang') === false) {
-           $lang = mb_strtolower(substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 2)[0]);
-           if(file_exists(self::$dir . $lang. Settings::get('langExtension')))
+        self::$dir = $home;
+        if(Session::get('current_lang') === false) {
+           $lang = mb_strtolower(mb_substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2));
+           if(file_exists(self::$dir .  $lang. Settings::get('langExtension')))
                Session::set('current_lang', $lang);
            else
                Session::set('current_lang', self::all()[0]);
-       }
-
+        }
     }
 
     /**
@@ -64,7 +64,6 @@ class Language
     public static function get($index, $var, $section = true)
     {
         $file = self::$dir .  Session::get('current_lang'). Settings::get('langExtension');
-
         if(file_exists($file)) {
             $archive = parse_ini_file($file, $section);
             if(key_exists($index, $archive))
@@ -95,12 +94,9 @@ class Language
         {
             $directory = dir(self::$dir);
             $archives = array();
-            while(($archive = $directory->read()) !== false ) {
-                $file = self::$dir . $archive;
-                if(file_exists($file) and !is_dir($file))
+            while(($archive = $directory->read()) !== false)
+                if(file_exists(self::$dir . $archive) and !is_dir(self::$dir . $archive))
                     array_push($archives, str_replace(Settings::get('langExtension'), "", $archive));
-            }
-
 
             $directory->close();
             return $archives;
