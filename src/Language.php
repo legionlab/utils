@@ -46,21 +46,7 @@ class Language
         }
     }
 
-    /**
-     * Pega uma string do arquivo de linguagem, por padrao usa section, que permite deixar o arquivo
-     * mais organizado. Exemplo:
-     * [login]
-     *      title = "Faça o login"
-     * Ao inves de deixar apenas variaveis espalhadas, porém é possivel usar sem section (nao
-     * recomendado), ao ser informado um index, como:
-     * Language::get('login')
-     * é pego todas variaveis daquela section, para pegar apenas uma use:
-     * Language::get('login')['title']
-     *
-     * @param $index - indice ou section a pegar
-     * @param bool $section - uso de section habilitado por padrao
-     * @return mixed - a string ou array econtrado ou um false indicando que nao encontrou
-     */
+
     public static function get($index, $var, $section = true)
     {
         $file = self::$dir .  Session::get('current_lang'). Settings::get('langExtension');
