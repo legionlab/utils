@@ -131,19 +131,44 @@ class Criteria
     {
         $sign = mb_strtoupper($sign);
         if(in_array($sign, $this->signs)) {
-            if(empty($this->where)) {
-                $this->where = " WHERE {$column} {$sign}  :" . str_replace('.', '', $column) . " ";
-                $this->values[$column] = $value;
-            }
-            else {
-                if(mb_stripos($this->tables, @explode('.', $value)[0]))
-                    $this->where .= " {$text} {$column} {$sign} {$value} ";
-                else {
-                    $this->where .= " {$text} {$column} {$sign} :" . str_replace('.', '', $column) . " ";
-                    $this->values[$column] = $value;
-                }
+
+            if(strpos($column, ':::')) {
+                $crop = explode(':::', $column);
+                $column = "{$crop[0]}({$crop[1]})";
             }
 
+
+            if(strpos($value, ':::')) {
+                $crop = explode(':::', $value);
+                if (empty($this->where))
+                    $this->where .= " WHERE {$column} {$sign} {$crop[0]}({$crop[1]}) ";
+                else
+                    $this->where .= " {$text} {$column} {$sign} {$crop[0]}({$crop[1]}) ";
+            }
+            else {
+                if (empty($this->where)) {
+                    $this->where = " WHERE {$column} {$sign}  :" . str_replace('.', '', $column) . "criteria ";
+                    $this->values[$column.'criteria'] = $value;
+                } else {
+                    if (mb_stripos($this->tables, @explode('.', $value)[0]))
+                        $this->where .= " {$text} {$column} {$sign} {$value} ";
+                    else {
+                        if (!key_exists($column, $this->values))
+                            $this->where .= " {$text} {$column} {$sign} :" . str_replace('.', '', $column) . "criteria ";
+                        else {
+                            $columnBkp = $column;
+                            $count = 1;
+                            while (key_exists($column, $this->values)) {
+                                $column = "{$columnBkp}{$count}";
+                                $count++;
+                            }
+                            $this->where .= " {$text} {$columnBkp} {$sign} :" . str_replace('.', '', $column) . "criteria ";
+                        }
+
+                        $this->values[$column.'criteria'] = $value;
+                    }
+                }
+            }
         }
     }
 

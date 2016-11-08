@@ -13,6 +13,11 @@ namespace LegionLab\Utils;
 
 class Post
 {
+    public static function all()
+    {
+        return $_POST;
+    }
+
     /**
      * Mostra os posts ativos
      */
